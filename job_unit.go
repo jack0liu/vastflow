@@ -64,9 +64,8 @@ func UpdateUnitStatus(name, status string, o orm.Ormer) error {
 	job := JobUnit{
 		Name:      name,
 		Status:    status,
-		UpdatedAt: time.Now().UTC(),
 	}
-	if _, err := o.Update(&job, "status", "updated_at"); err != nil {
+	if _, err := o.Update(&job, "status"); err != nil {
 		logs.Error("update fail,%s", err.Error())
 		return err
 	}
