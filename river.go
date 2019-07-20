@@ -1,9 +1,9 @@
 package vastflow
 
 import (
+	"code.huawei.com/stable/logs"
 	"errors"
 	"fmt"
-        "github.com/jack0liu/logs"
 	"reflect"
 	"time"
 )
@@ -31,6 +31,8 @@ type RiverAttr struct {
 	CycleInterval int32
 
 	Durable bool
+
+	Atomic bool
 
 	isInner bool
 }
@@ -103,9 +105,17 @@ func (an *River) updateWater(headwaters *Headwaters) error {
 func (an *River) innerFlow(headwaters *Headwaters, flow RiverFlow) (errCause string, err error) {
 	select {
 	case <-headwaters.basinFinish():
-		return "", ErrorBasinCanceled
+		if an.attr.Atomic {
+			return flow.Flow(headwaters)
+		} else {
+			return "", ErrorBasinCanceled
+		}
 	case <-headwaters.Done():
-		return "", ErrorCanceled
+		if an.attr.Atomic {
+			return flow.Flow(headwaters)
+		} else {
+			return "", ErrorCanceled
+		}
 	default:
 		return flow.Flow(headwaters)
 	}
@@ -261,9 +271,17 @@ func (an *River) doCycle(headwaters *Headwaters, flow RiverFlow) (errStr string,
 		time.Sleep(time.Duration(an.attr.CycleInterval) * time.Second)
 		select {
 		case <-headwaters.basinFinish():
-			return "basin canceled", ErrorCanceled
+			if an.attr.Atomic {
+				errStr, err = flow.Cycle(headwaters)
+			} else {
+				return "basin canceled", ErrorCanceled
+			}
 		case <-headwaters.Done():
-			return "river canceled", ErrorCanceled
+			if an.attr.Atomic {
+				errStr, err = flow.Cycle(headwaters)
+			} else {
+				return "river canceled", ErrorCanceled
+			}
 		default:
 			errStr, err = flow.Cycle(headwaters)
 		}
@@ -308,9 +326,17 @@ func (an *River) runCycle(headwaters *Headwaters, flow RiverFlow) error {
 		time.Sleep(time.Duration(an.attr.CycleInterval) * time.Second)
 		select {
 		case <-headwaters.basinFinish():
-			return ErrorCanceled
+			if an.attr.Atomic {
+				errStr, err = flow.Cycle(headwaters)
+			} else {
+				return ErrorCanceled
+			}
 		case <-headwaters.Done():
-			return ErrorCanceled
+			if an.attr.Atomic {
+				errStr, err = flow.Cycle(headwaters)
+			} else {
+				return ErrorCanceled
+			}
 		default:
 			errStr, err = flow.Cycle(headwaters)
 		}
