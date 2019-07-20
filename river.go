@@ -1,7 +1,7 @@
 package vastflow
 
 import (
-	"code.huawei.com/stable/logs"
+	"github.com/jack0liu/logs"
 	"errors"
 	"fmt"
 	"reflect"
