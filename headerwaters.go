@@ -1,13 +1,12 @@
 package vastflow
 
 import (
-	"github.com/jack0liu/logs"
 	"errors"
+	"github.com/jack0liu/logs"
 	"github.com/satori/go.uuid"
 	"reflect"
 	"sync"
 )
-
 
 type errorBasin struct {
 	err error
@@ -83,7 +82,6 @@ func (hw *Headwaters) Replace(other *Headwaters) {
 	defer hw.mu.Unlock()
 	hw.context = other.context
 }
-
 
 func (hw *Headwaters) Get(key string) interface{} {
 	hw.mu.RLock()
@@ -232,7 +230,6 @@ func (hw *Headwaters) TmpGet(key string) string {
 	logs.Debug("[%s]'s value[%v] is not string", key, v)
 	return ""
 }
-
 
 func (hw *Headwaters) basinFinish() <-chan struct{} {
 	hw.basinMu.Lock()

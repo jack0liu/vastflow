@@ -1,23 +1,23 @@
 package vastflow
 
 import (
-	"github.com/jack0liu/logs"
 	"errors"
 	"github.com/astaxie/beego/orm"
+	"github.com/jack0liu/logs"
 	"sync"
 	"time"
 )
 
 const (
 	defaultHeartInterval = 2
-	displayTimes = 5
+	displayTimes         = 5
 )
 
 var (
-	heartOnce = sync.Once{}
-	checkOnce = sync.Once{}
-	shrinkOnce = sync.Once{}
-	thisUnit string
+	heartOnce   = sync.Once{}
+	checkOnce   = sync.Once{}
+	shrinkOnce  = sync.Once{}
+	thisUnit    string
 	intervalSec int
 )
 
@@ -35,9 +35,9 @@ func StartHeart(myUnit string, heartIntervalSec int) error {
 	unit, err := getUnit(myUnit)
 	if err == orm.ErrNoRows {
 		newUnit := JobUnit{
-			Name: myUnit,
-			Status: UnitActive,
-			CreateAt: time.Now().UTC(),
+			Name:      myUnit,
+			Status:    UnitActive,
+			CreateAt:  time.Now().UTC(),
 			UpdatedAt: time.Now().UTC(),
 		}
 		if err := SaveUnit(newUnit); err != nil {
@@ -67,7 +67,6 @@ func StartHeart(myUnit string, heartIntervalSec int) error {
 	go shrinkOnce.Do(checkShrink)
 	return nil
 }
-
 
 func heart() {
 	t := time.NewTicker(time.Duration(intervalSec) * time.Second)

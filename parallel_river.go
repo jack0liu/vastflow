@@ -1,8 +1,8 @@
 package vastflow
 
 import (
-	"github.com/jack0liu/logs"
 	"errors"
+	"github.com/jack0liu/logs"
 	"sync"
 )
 
@@ -17,18 +17,17 @@ type ParallelRiver struct {
 	wg     sync.WaitGroup
 	rivers []Stream
 
-	id    string
+	id      string
 	errStr  string // failed error str
-	down  Stream
-	state streamState
-	color string
+	down    Stream
+	state   streamState
+	color   string
 	waterId string // used for restore
 }
 
 func init() {
 	RegisterStream(new(ParallelRiver))
 }
-
 
 func (pa *ParallelRiver) setFail(errStr string, headwaters *Headwaters) error {
 	pa.state = stateFail
@@ -61,7 +60,6 @@ func (pa *ParallelRiver) setRunning() error {
 	}
 	return nil
 }
-
 
 func (pa *ParallelRiver) updateWater(headwaters *Headwaters) error {
 	if err := updateHeadwaters(headwaters); err != nil {
@@ -133,16 +131,15 @@ func (pa *ParallelRiver) setId(id string) {
 	pa.id = id
 }
 
-func (pa *ParallelRiver) getId() string{
+func (pa *ParallelRiver) getId() string {
 	return pa.id
 }
-
 
 func (pa *ParallelRiver) setState(state streamState) {
 	pa.state = state
 }
 
-func (pa *ParallelRiver) getState() streamState{
+func (pa *ParallelRiver) getState() streamState {
 	return pa.state
 }
 
@@ -153,7 +150,6 @@ func (pa *ParallelRiver) setWaterId(waterId string) {
 func (pa *ParallelRiver) getWaterId() string {
 	return pa.waterId
 }
-
 
 func (pa *ParallelRiver) setColor(color string) {
 	pa.color = color
@@ -213,7 +209,6 @@ func (pa *ParallelRiver) Append(river Stream) *ParallelRiver {
 	return pa
 }
 
-
 func (pa *ParallelRiver) getRivers() []Stream {
 	return pa.rivers
 }
@@ -221,7 +216,6 @@ func (pa *ParallelRiver) getRivers() []Stream {
 func (pa *ParallelRiver) runInit(flow RiverFlow) {
 	flow.Update(&pa.attr)
 }
-
 
 func (pa *ParallelRiver) runNext(headwaters *Headwaters, syncNext bool) error {
 	// do next
@@ -238,7 +232,6 @@ func (pa *ParallelRiver) runNext(headwaters *Headwaters, syncNext bool) error {
 	}
 	return nil
 }
-
 
 func (pa *ParallelRiver) runFlow(headwaters *Headwaters, flow RiverFlow) error {
 	select {

@@ -2,13 +2,13 @@ package vastflow
 
 import (
 	"fmt"
-        "github.com/jack0liu/logs"
+	"github.com/jack0liu/logs"
 	"reflect"
 )
 
-var streamTypes = make(map[string] reflect.Type)
+var streamTypes = make(map[string]reflect.Type)
 
-var atlanticTypes = make(map[string] reflect.Type)
+var atlanticTypes = make(map[string]reflect.Type)
 
 func RegisterStream(stream Stream) {
 	if stream == nil {

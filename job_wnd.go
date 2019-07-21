@@ -16,8 +16,8 @@ import (
 
 const (
 	DefaultWndCapacity = 500
-	defaultShrinkLen = 2
-	defaultExtendLen = 2
+	defaultShrinkLen   = 2
+	defaultExtendLen   = 2
 )
 
 var flowWnd = &FlowWnd{
@@ -42,9 +42,9 @@ type stat struct {
 type FlowWnd struct {
 	sync.RWMutex
 
-	Capacity   int64
-	extended   int64
-	CurSize    int64
+	Capacity int64
+	extended int64
+	CurSize  int64
 
 	usedCpuNum int
 	markRate   float64
@@ -79,7 +79,7 @@ func checkShrink() {
 				break
 			}
 			flowWnd.Lock()
-			if flowWnd.CurSize + defaultShrinkLen < flowWnd.Capacity + flowWnd.extended {
+			if flowWnd.CurSize+defaultShrinkLen < flowWnd.Capacity+flowWnd.extended {
 				continueCount++
 			} else {
 				continueCount = 0
@@ -93,9 +93,8 @@ func checkShrink() {
 	}
 }
 
-
 func (fw *FlowWnd) checkShrink() bool {
-	if fw.CurSize + defaultShrinkLen <= fw.Capacity {
+	if fw.CurSize+defaultShrinkLen <= fw.Capacity {
 		return true
 	}
 	return false
@@ -138,7 +137,7 @@ func (fw *FlowWnd) IsBelowMark() bool {
 }
 
 func (fw *FlowWnd) Print() {
-	logs.Info("flow window curSize:%d, total capacity:%d", fw.CurSize, fw.Capacity + fw.extended)
+	logs.Info("flow window curSize:%d, total capacity:%d", fw.CurSize, fw.Capacity+fw.extended)
 }
 
 func (fw *FlowWnd) calc() *SysInfo {

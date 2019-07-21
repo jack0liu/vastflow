@@ -1,13 +1,13 @@
 package vastflow
 
 import (
-	"github.com/jack0liu/conf"
-	"github.com/jack0liu/logs"
-	"github.com/jack0liu/utils"
 	"errors"
 	"fmt"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/jack0liu/conf"
+	"github.com/jack0liu/logs"
+	"github.com/jack0liu/utils"
 	"path/filepath"
 	"sync"
 	"sync/atomic"

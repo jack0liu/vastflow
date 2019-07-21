@@ -1,8 +1,8 @@
 package vastflow
 
 import (
-	"github.com/jack0liu/logs"
 	"errors"
+	"github.com/jack0liu/logs"
 	"reflect"
 )
 

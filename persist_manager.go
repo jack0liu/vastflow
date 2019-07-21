@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"github.com/astaxie/beego/orm"
- 	"github.com/jack0liu/logs"
+	"github.com/jack0liu/logs"
 	"github.com/satori/go.uuid"
 	"reflect"
 	"sync"
@@ -284,7 +284,7 @@ func fromPersistWater(waterStr string) *Headwaters {
 			err: errors.New(pw.BasinErr.Err),
 		}
 	} else {
-	 	headwaters.basinErr = &errorBasin{}
+		headwaters.basinErr = &errorBasin{}
 	}
 	if pw.BasinDone {
 		headwaters.basinDone = closedChan

@@ -1,9 +1,9 @@
 package vastflow
 
 import (
-	"github.com/jack0liu/logs"
 	"errors"
 	"fmt"
+	"github.com/jack0liu/logs"
 	"reflect"
 	"time"
 )
@@ -342,14 +342,14 @@ func (an *River) runCycle(headwaters *Headwaters, flow RiverFlow) error {
 		}
 		if err == nil {
 			//out set success
-			logs.Info("[%s][%s]%v cycle success",headwaters.RequestId, an.color, reflect.ValueOf(flow).Elem().Type())
+			logs.Info("[%s][%s]%v cycle success", headwaters.RequestId, an.color, reflect.ValueOf(flow).Elem().Type())
 			return nil
 		}
 		if err == ErrorContinue {
 			an.cycleCount++
 			continue
 		}
-		logs.Info("[%s][%s]%v cycle err:%s",headwaters.RequestId, an.color, reflect.ValueOf(flow).Elem().Type(), err.Error())
+		logs.Info("[%s][%s]%v cycle err:%s", headwaters.RequestId, an.color, reflect.ValueOf(flow).Elem().Type(), err.Error())
 		return err
 	}
 	errStr = fmt.Sprintf("[%s][%s]cycle %d times failed, cause:%s", headwaters.RequestId, an.color, an.cycleCount, errStr)

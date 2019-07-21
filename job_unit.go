@@ -1,8 +1,8 @@
 package vastflow
 
 import (
-	"github.com/jack0liu/logs"
 	"github.com/astaxie/beego/orm"
+	"github.com/jack0liu/logs"
 	"time"
 )
 
@@ -62,8 +62,8 @@ func UpdateUnitStatus(name, status string, o orm.Ormer) error {
 		o = orm.NewOrm()
 	}
 	job := JobUnit{
-		Name:      name,
-		Status:    status,
+		Name:   name,
+		Status: status,
 	}
 	if _, err := o.Update(&job, "status"); err != nil {
 		logs.Error("update fail,%s", err.Error())

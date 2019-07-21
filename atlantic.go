@@ -129,7 +129,6 @@ func (at *Atlantic) getId() string {
 	return at.id
 }
 
-
 func (at *Atlantic) setState(state streamState) {
 	at.state = state
 }
@@ -138,11 +137,9 @@ func (at *Atlantic) getState() streamState {
 	return at.state
 }
 
-
 func (at *Atlantic) setWaterId(waterId string) {
 	at.waterId = waterId
 }
-
 
 func (at *Atlantic) getWaterId() string {
 	return at.waterId
@@ -153,7 +150,3 @@ func (at *Atlantic) releaseWnd() {
 	flowWnd.Dec()
 	flowWnd.Unlock()
 }
-
-
-
-

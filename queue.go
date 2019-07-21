@@ -16,7 +16,7 @@ const (
 	JobFailed  = "failed"
 	JobSuccess = "success"
 
-	maxContinueCount  = 10
+	maxContinueCount = 10
 )
 
 var (
@@ -133,7 +133,7 @@ func fetchWaitingJobByUnit(unit string) (job *JobQueue, err error) {
 	defer flowWnd.Unlock()
 	if flowWnd.Remains() <= 0 {
 		errStr := fmt.Sprintf("not have enough wnd, curSize:%d, total capacity:%d",
-			flowWnd.CurSize, flowWnd.Capacity + flowWnd.extended)
+			flowWnd.CurSize, flowWnd.Capacity+flowWnd.extended)
 		logs.Info(errStr)
 		if flowWnd.IsBelowMark() {
 			slowExpandCount++
@@ -151,7 +151,7 @@ func fetchWaitingJobByUnit(unit string) (job *JobQueue, err error) {
 		Filter("id", j.Id).
 		Filter("status", JobWaiting). // avoid other update this
 		Update(orm.Params{
-			"status":  JobRunning,
+			"status":     JobRunning,
 			"updated_at": time.Now().UTC(),
 		})
 	if err != nil {
@@ -172,7 +172,7 @@ func SetRunningJobFailed(jobId string) error {
 		Filter("id", jobId).
 		Filter("status", JobRunning). // avoid other update this
 		Update(orm.Params{
-			"status":  JobFailed,
+			"status":     JobFailed,
 			"updated_at": time.Now().UTC(),
 		})
 	if err != nil {
@@ -192,8 +192,8 @@ func SetRunningJobFailed(jobId string) error {
 func UpdateJobStatus(jobId, status string) error {
 	o := orm.NewOrm()
 	job := JobQueue{
-		Id:    jobId,
-		Status: status,
+		Id:        jobId,
+		Status:    status,
 		UpdatedAt: time.Now().UTC(),
 	}
 	if _, err := o.Update(&job, "status", "updated_at"); err != nil {
@@ -211,9 +211,9 @@ func UnSetJobUnit(unit string, o orm.Ormer) error {
 		Filter("status", JobRunning).
 		Filter("proc_unit", unit).
 		Update(orm.Params{
-		"proc_unit": "",
-		"status": JobWaiting,
-	})
+			"proc_unit": "",
+			"status":    JobWaiting,
+		})
 	if err != nil {
 		logs.Error("update fail err:%s", err.Error())
 		return err
@@ -228,7 +228,7 @@ func transJobStatusByUnit(unit, fromStatus, toStatus string) error {
 		Filter("proc_unit", unit).
 		Filter("status", fromStatus). // avoid other update this
 		Update(orm.Params{
-			"status":  toStatus,
+			"status":     toStatus,
 			"updated_at": time.Now().UTC(),
 		})
 	if err != nil {

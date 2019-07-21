@@ -2,9 +2,9 @@ package vastflow
 
 type Stream interface {
 	Run(waters *Headwaters, flow RiverFlow, syncNext bool) error
-	SetDownStream(down Stream)  // set next stream
+	SetDownStream(down Stream) // set next stream
 	next() Stream
-	setInner()     // if parallel inner river
+	setInner() // if parallel inner river
 
 	setId(id string)
 	getId() string

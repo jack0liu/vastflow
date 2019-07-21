@@ -1,8 +1,8 @@
 package vastflow
 
 import (
-	"github.com/jack0liu/logs"
 	"errors"
+	"github.com/jack0liu/logs"
 )
 
 type BasinStream interface {
@@ -201,7 +201,6 @@ func (rb *RiverBasin) Cycle(headwaters *Headwaters) (errCause string, err error)
 	logs.Debug("basin cycle water ")
 	return "", nil
 }
-
 
 func (rb *RiverBasin) DrawStream(river Stream) *RiverBasin {
 	if _, ok := river.(RiverFlow); !ok {
