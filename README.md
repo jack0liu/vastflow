@@ -41,7 +41,7 @@ Atlantic, the final destination of each river, used to express the processing lo
 
 ### For example, arrange a task as shown below
 
-<img src="https://github.com/jack0liu/vastflow/example/exampl1.png" width="300">
+<img src="https://github.com/jack0liu/vastflow/tree/master/example/exampl1.png" width="300">
 
 The figure describes a simple task, create a new virtual machine, and then mount the data volume to the new virtual machine
 
