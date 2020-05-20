@@ -19,7 +19,6 @@ func saveDraw(andes *Andes, initState streamState) (andesId string, err error) {
 	flows := make([]*VastFlow, 0)
 	waters, flows = buildFlows(waters, flows, rivers, requestId, rootParent, initState, 0, andes.headwaters)
 	flows = buildAtlantic(flows, initState, andes.headwaters)
-	logs.Debug("len(flows):%d", len(flows))
 	if len(flows) == 0 {
 		err = errors.New("flows length is 0")
 		logs.Error("flows length is 0")

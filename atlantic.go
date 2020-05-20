@@ -36,7 +36,7 @@ func (at *Atlantic) updateWater(headwaters *Headwaters) error {
 }
 
 func (at *Atlantic) runSuccess(headwaters *Headwaters, flow AtlanticFlow) {
-	logs.Debug("%v run , id :%s", reflect.ValueOf(flow).Elem().Type(), at.id)
+	//logs.Debug("%v run , id :%s", reflect.ValueOf(flow).Elem().Type(), at.id)
 	defer func() {
 		if e := recover(); e != nil {
 			logs.Error("%v", e)

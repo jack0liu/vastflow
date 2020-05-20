@@ -174,12 +174,12 @@ func (pa *ParallelRiver) runRiver(headwaters *Headwaters, river Stream) {
 	if err := river.Run(headwaters, river.(RiverFlow), true); err != nil && err != ErrorCanceled {
 		headwaters.Cancel(err)
 	}
-	logs.Debug("one river done")
+	//logs.Debug("one river done")
 	pa.wg.Done()
 }
 
 func (pa *ParallelRiver) Update(attr *RiverAttr) {
-	logs.Debug("parallel update water ")
+	//logs.Debug("parallel update water ")
 }
 
 func (pa *ParallelRiver) Flow(headwaters *Headwaters) (errCause string, err error) {
@@ -193,7 +193,6 @@ func (pa *ParallelRiver) Cycle(headwaters *Headwaters) (errCause string, err err
 }
 
 func (pa *ParallelRiver) Append(river Stream) *ParallelRiver {
-	logs.Debug("parallel append river ")
 	if pa.rivers == nil {
 		pa.rivers = make([]Stream, 0)
 	}
@@ -240,7 +239,7 @@ func (pa *ParallelRiver) runFlow(headwaters *Headwaters, flow RiverFlow) error {
 	case <-headwaters.Done():
 		return ErrorCanceled
 	default:
-		logs.Debug("[%s][%s]run parallel river", headwaters.RequestId, pa.color)
+		//logs.Debug("[%s][%s]run parallel river", headwaters.RequestId, pa.color)
 	}
 	// do run
 	for _, v := range pa.rivers {

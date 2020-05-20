@@ -122,7 +122,7 @@ func (an *River) innerFlow(headwaters *Headwaters, flow RiverFlow) (errCause str
 }
 
 func (an *River) Run(headwaters *Headwaters, flow RiverFlow, syncNext bool) (err error) {
-	logs.Info("[%s][%s]%v run start, id :%s", headwaters.RequestId, an.color, reflect.ValueOf(flow).Elem().Type(), an.id)
+	//logs.Info("[%s][%s]%v run start, id :%s", headwaters.RequestId, an.color, reflect.ValueOf(flow).Elem().Type(), an.id)
 	defer func() {
 		if e := recover(); e != nil {
 			logs.Error("[%s][%s]%v", headwaters.RequestId, an.color, e)
@@ -179,7 +179,7 @@ func (an *River) Run(headwaters *Headwaters, flow RiverFlow, syncNext bool) (err
 		}
 		fallthrough
 	case stateSuccess:
-		logs.Info("[%s][%s]%v run success, id :%s", headwaters.RequestId, an.color, reflect.ValueOf(flow).Elem().Type(), an.id)
+		//logs.Info("[%s][%s]%v run success, id :%s", headwaters.RequestId, an.color, reflect.ValueOf(flow).Elem().Type(), an.id)
 		return an.runNext(headwaters, syncNext)
 	case stateFail:
 		logs.Error("[%s][%s]flow has been failed", headwaters.RequestId, an.color)
@@ -342,7 +342,7 @@ func (an *River) runCycle(headwaters *Headwaters, flow RiverFlow) error {
 		}
 		if err == nil {
 			//out set success
-			logs.Info("[%s][%s]%v cycle success", headwaters.RequestId, an.color, reflect.ValueOf(flow).Elem().Type())
+			//logs.Info("[%s][%s]%v cycle success", headwaters.RequestId, an.color, reflect.ValueOf(flow).Elem().Type())
 			return nil
 		}
 		if err == ErrorContinue {
